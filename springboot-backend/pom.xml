@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>net.javaguides</groupId>
-	<artifactId>springboot.backend</artifactId>
+	<artifactId>springboot-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springboot.backend</name>
-	<description>Employee management project of Spring Boot</description>
+	<name>springboot-backend</name>
+	<description>Simple project of Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
