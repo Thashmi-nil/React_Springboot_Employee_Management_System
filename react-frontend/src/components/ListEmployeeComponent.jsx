@@ -8,8 +8,6 @@ export default class ListEmployeeComponent extends Component {
         this.state = {
             employees: []
         }
-
-
     }
     componentDidMount() {
         EmployeeService.getEmployees().then((res) => {
@@ -19,7 +17,7 @@ export default class ListEmployeeComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">Employees List</h2>
+                <h2 className="text-center">Employee List</h2>
 
                 <div className="row">
                     <table className="table table-striped table-bordered">
