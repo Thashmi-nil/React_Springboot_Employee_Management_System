@@ -29,6 +29,9 @@ export default class ListEmployeeComponent extends Component {
             this.setState({ employees: this.state.employees.filter(employee => employee.id !== id) });
         });
     }
+    viewEmployee(id) {
+        this.props.history.push(`/view-employee/${id}`);
+    }
 
     render() {
         return (
@@ -60,6 +63,7 @@ export default class ListEmployeeComponent extends Component {
                                             <td>
                                                 <button onClick={() => this.editEmployee(employee.id)} className="btn btn-info">Update </button>
                                                 <button style={{ marginLeft: "10px" }} onClick={() => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button>
+                                                <button style={{ marginLeft: "10px" }} onClick={() => this.viewEmployee(employee.id)} className="btn btn-warning" >View </button>
                                             </td>
                                         </tr>
                                 )
