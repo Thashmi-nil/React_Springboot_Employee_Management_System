@@ -32,8 +32,7 @@ public class EmployeeController {
 	// get employee by id rest
 	@GetMapping("/employees/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-		Employee employee = employeeRepository.findById(id)
-				.orElseThrow();
+		Employee employee = employeeRepository.findById(id).orElseThrow();
 		return ResponseEntity.ok(employee);
 	}
 
