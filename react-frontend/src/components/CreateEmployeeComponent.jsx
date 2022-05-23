@@ -6,23 +6,45 @@ export default class CreateEmployeeComponent extends Component {
         super(props)
 
         this.state = {
+            id: this.props.match.params.id,
             firstName: '',
             lastName: '',
             emailId: ''
         }
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        this.saveEmployee = this.saveEmployee.bind(this);
+        this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
     }
-    saveEmployee = (e) => {
+    saveOrUpdateEmployee = (e) => {
         e.preventDefault();
         let employee = { firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId };
         console.log('employee => ' + JSON.stringify(employee));
 
-        EmployeeService.createEmployee(employee).then(res => {
-            this.props.history.push('/employees');
-        });
+        if (this.state.id === '_add') {
+            EmployeeService.createEmployee(employee).then(res => {
+                this.props.history.push('/employees');
+            });
+        } else {
+            EmployeeService.updateEmployee(employee, this.state.id).then(res => {
+                this.props.history.push('/employees');
+            });
+        }
     }
+    componentDidMount() {
+        if (this.state.id === '_add') {
+            return
+        } else {
+            EmployeeService.getEmployeeById(this.state.id).then((res) => {
+                let employee = res.data;
+                this.setState({
+                    firstName: employee.firstName,
+                    lastName: employee.lastName,
+                    emailId: employee.emailId
+                });
+            });
+        }
+    }
+
     cancel() {
         this.props.history.push('/employees');
     }
@@ -36,6 +58,13 @@ export default class CreateEmployeeComponent extends Component {
     changeEmailHandler = (event) => {
         this.setState({ emailId: event.target.value });
     }
+    getTitle() {
+        if (this.state.id === '_add') {
+            return <h3 className="text-center">Add Employee</h3>
+        } else {
+            return <h3 className="text-center">Update Employee</h3>
+        }
+    }
 
     render() {
         return (
@@ -44,7 +73,9 @@ export default class CreateEmployeeComponent extends Component {
                 <div className="container">
                     <div className="row" style={{ paddingTop: "50px" }}>
                         <div className="card col-md-6 offset-md-3 offset-md-3">
-                            <h3 className="text-center">Add Employee</h3>
+                            {
+                                this.getTitle()
+                            }
                             <div className="card-body">
                                 <form action="">
                                     <div className="form-group">
@@ -63,7 +94,7 @@ export default class CreateEmployeeComponent extends Component {
                                             value={this.state.emailId} onChange={this.changeEmailHandler} />
                                     </div>
 
-                                    <button className="btn btn-success" onClick={this.saveEmployee}>Save</button>
+                                    <button className="btn btn-success" onClick={this.saveOrUpdateEmployee}>Save</button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{ marginLeft: "10px" }}>Cancel</button>
 
                                 </form>
