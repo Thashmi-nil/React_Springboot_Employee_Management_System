@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import EmployeeService from '../services/EmployeeService';
+// import '../components/LandingPage/LandingPage.css'
 
 export default class ListEmployeeComponent extends Component {
     constructor(props) {
@@ -34,44 +35,56 @@ export default class ListEmployeeComponent extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <h2 className="text-center">Employee List</h2>
-                <div className="row">
-                    <button className="btn btn-primary" onClick={this.addEmployee} style={{ width: "200px" }}> Add Employee</button>
-                </div>
-                <br></br>
-                <div className="row">
-                    <table className="table table-striped table-bordered">
+        // const [nav, setnav] = useState(false);
 
-                        <thead>
-                            <tr>
-                                <th> Employee First Name</th>
-                                <th> Employee Last Name</th>
-                                <th> Employee Email Id</th>
-                                <th> Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.employees.map(
-                                    employee =>
-                                        <tr key={employee.id}>
-                                            <td> {employee.firstName} </td>
-                                            <td> {employee.lastName}</td>
-                                            <td> {employee.emailId}</td>
-                                            <td>
-                                                <button onClick={() => this.editEmployee(employee.id)} className="btn btn-info">Update </button>
-                                                <button style={{ marginLeft: "10px" }} onClick={() => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button>
-                                                <button style={{ marginLeft: "10px" }} onClick={() => this.viewEmployee(employee.id)} className="btn btn-warning" >View </button>
-                                            </td>
-                                        </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
+        return (
+            <>
+                <nav className="">
+                    <ul className=''>
+                        <li><a href='/analytics' smooth={true} duration={1000}>Analytics</a></li>
+                    </ul>
+                    <ul className=''>
+                        <li><a href='/report' smooth={true} duration={1000}>Reports</a></li>
+                    </ul>
+                </nav>
+                <div>
+                    <h2 className="text-center" style={{ marginTop: '20px' }}>Employee List</h2>
+                    <div className="row">
+                        <button className="btn btn-primary" onClick={this.addEmployee} style={{ width: "200px" }}> Add Employee</button>
+                    </div>
+                    <br></br>
+                    <div className="row">
+                        <table className="table table-striped table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th> Employee First Name</th>
+                                    <th> Employee Last Name</th>
+                                    <th> Employee Email Id</th>
+                                    <th> Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.employees.map(
+                                        employee =>
+                                            <tr key={employee.id}>
+                                                <td> {employee.firstName} </td>
+                                                <td> {employee.lastName}</td>
+                                                <td> {employee.emailId}</td>
+                                                <td>
+                                                    <button onClick={() => this.editEmployee(employee.id)} className="btn btn-info">Update </button>
+                                                    <button style={{ marginLeft: "10px" }} onClick={() => this.deleteEmployee(employee.id)} className="btn btn-danger">Delete </button>
+                                                    <button style={{ marginLeft: "10px" }} onClick={() => this.viewEmployee(employee.id)} className="btn btn-warning" >View </button>
+                                                </td>
+                                            </tr>
+                                    )
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }
 }
