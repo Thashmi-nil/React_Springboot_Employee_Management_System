@@ -1,9 +1,5 @@
 # React_Springboot_Employee_Management_System
 
-<div style="text-align:center"><img src="./public/logo/bannerWhiteBgLessH.png" /></div>
-
-# "Beauty Craft" - An Integrated Management System for Salons
-
 This is an Employee Management System which provide facilities to add, update, delete and view employees. And also there are navigations for report view and analytics view.
 
 ## Screen Captures
